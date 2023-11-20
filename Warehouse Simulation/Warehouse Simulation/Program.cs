@@ -1,4 +1,15 @@
-﻿using System;
+﻿///////////////////////////////////////////////////////////////////////////////
+//
+// Author: Caden Atwell, atwellc@etsu.edu
+// Course: CSCI-2210-001 - Data Structures
+// Assignment: Warehouse Simulation
+// Description: Program showing simulation of trucks arriving to a warehouse to see what is 
+// most efficient
+//
+///////////////////////////////////////////////////////////////////////////////
+
+
+using System;
 using Warehouse_Simulation;
 
 class Program
