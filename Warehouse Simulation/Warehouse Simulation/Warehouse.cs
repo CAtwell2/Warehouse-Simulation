@@ -16,13 +16,23 @@ using System.Threading.Tasks;
 
 namespace Warehouse_Simulation
 {
+    /// <summary>
+    /// Represents the warehouse in the simulation, managing the docks and the process of truck arrivals and departures.
+    /// </summary>
     public class Warehouse
     {
         private List<Dock> Docks;
+        /// <summary>
+        /// Queue of trucks waiting to enter the docks.
+        /// </summary>
         public Queue<Truck> Entrance { get; private set; }
         private int CurrentTimeIncrement;
         private StringBuilder logBuilder;
 
+        /// <summary>
+        /// Initializes a new instance of the Warehouse class with a specified number of docks.
+        /// </summary>
+        /// <param name="numberOfDocks">The number of docks to be created in the warehouse.</param>
         public Warehouse(int numberOfDocks)
         {
             Docks = new List<Dock>(numberOfDocks);
@@ -35,6 +45,10 @@ namespace Warehouse_Simulation
             logBuilder = new StringBuilder();
         }
 
+        /// <summary>
+        /// Runs the simulation for a specified number of time increments.
+        /// </summary>
+        /// <param name="totalIncrements">The total number of time increments for the simulation to run.</param>
         public void Run(int totalIncrements)
         {
             for (CurrentTimeIncrement = 0; CurrentTimeIncrement < totalIncrements; CurrentTimeIncrement++)
@@ -52,7 +66,10 @@ namespace Warehouse_Simulation
             WriteLogToFile();
         }
 
-         private void HandleTruckArrivals()
+        /// <summary>
+        /// Handles the arrival of trucks at the warehouse, simulating random truck arrivals.
+        /// </summary>
+        private void HandleTruckArrivals()
         {
             Random rnd = new Random();
             int trucksArriving = 0;
@@ -91,7 +108,9 @@ namespace Warehouse_Simulation
                 Entrance.Enqueue(newTruck);
             }
         }
-
+        /// <summary>
+        /// Assigns arriving trucks to available docks for unloading.
+        /// </summary>
         private void AssignTrucksToDocks()
         {
             foreach (var dock in Docks)
@@ -104,6 +123,12 @@ namespace Warehouse_Simulation
             }
         }
 
+        /// <summary>
+        /// Logs information about each crate as it is unloaded from a truck.
+        /// </summary>
+        /// <param name="crate">The crate being unloaded.</param>
+        /// <param name="truck">The truck from which the crate is being unloaded.</param>
+        /// <param name="scenario">The unloading scenario.</param>
         public void LogCrateUnloading(Crate crate, Truck truck, string scenario)
         {
             string csvLine = $"{CurrentTimeIncrement}, {truck.Driver}, {truck.DeliveryCompany}, {crate.Id}, {crate.Price}, {scenario}\n";
@@ -112,7 +137,9 @@ namespace Warehouse_Simulation
             string filePath = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + @"\Downloads\unloading_log.csv";
             File.AppendAllText(filePath, csvLine);
         }
-
+        /// <summary>
+        /// Generates a summary report of the warehouse simulation.
+        /// </summary>
         private void GenerateReport()
         {
             double totalRevenue = 0;
@@ -162,7 +189,9 @@ namespace Warehouse_Simulation
         }
 
 
-
+        /// <summary>
+        /// Writes the accumulated log entries to a file.
+        /// </summary>
         private void WriteLogToFile()
         {
             File.WriteAllText("unloading_log.csv", logBuilder.ToString());
