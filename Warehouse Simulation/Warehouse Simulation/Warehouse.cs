@@ -57,21 +57,21 @@ namespace Warehouse_Simulation
             Random rnd = new Random();
             int trucksArriving = 0;
 
-            // Define different probabilities for different times of the day
-            double morningArrivalProbability = 0.2; // 20% chance of a truck arriving
-            double middayArrivalProbability = 0.5;  // 50% chance of a truck arriving
-            double eveningArrivalProbability = 0.2; // 20% chance of a truck arriving
+           
+            double morningArrivalProbability = 0.2; 
+            double middayArrivalProbability = 0.5;  
+            double eveningArrivalProbability = 0.2; 
 
-            // Determine current period of the day
-            if (CurrentTimeIncrement <= 16) // Morning
+          
+            if (CurrentTimeIncrement <= 16) 
             {
                 trucksArriving = rnd.NextDouble() < morningArrivalProbability ? rnd.Next(1, 4) : 0;
             }
-            else if (CurrentTimeIncrement <= 32) // Midday
+            else if (CurrentTimeIncrement <= 32) 
             {
                 trucksArriving = rnd.NextDouble() < middayArrivalProbability ? rnd.Next(1, 6) : 0;
             }
-            else // Evening
+            else 
             {
                 trucksArriving = rnd.NextDouble() < eveningArrivalProbability ? rnd.Next(1, 4) : 0;
             }
@@ -81,7 +81,7 @@ namespace Warehouse_Simulation
                 string company = "Company" + rnd.Next(1, 10);
                 Truck newTruck = new Truck(driver, company);
 
-                int numberOfCrates = rnd.Next(1, 11); // Random number of crates
+                int numberOfCrates = rnd.Next(1, 11);
                 for (int j = 0; j < numberOfCrates; j++)
                 {
                     Crate newCrate = new Crate("Crate" + rnd.Next(10000, 99999));
@@ -108,7 +108,7 @@ namespace Warehouse_Simulation
         {
             string csvLine = $"{CurrentTimeIncrement}, {truck.Driver}, {truck.DeliveryCompany}, {crate.Id}, {crate.Price}, {scenario}\n";
 
-            // Append to a CSV file
+          
             string filePath = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + @"\Downloads\unloading_log.csv";
             File.AppendAllText(filePath, csvLine);
         }
@@ -129,7 +129,7 @@ namespace Warehouse_Simulation
                 totalTrucksProcessed += dock.TotalTrucks;
                 totalTimeInUse += dock.TimeInUse;
                 totalTimeNotInUse += dock.TimeNotInUse;
-                totalOperatingCost += dock.TimeInUse * 100; // Assuming $100 per time increment
+                totalOperatingCost += dock.TimeInUse * 100; 
             }
 
             double averageValuePerCrate = totalCratesUnloaded > 0 ? totalRevenue / totalCratesUnloaded : 0;
@@ -151,13 +151,13 @@ namespace Warehouse_Simulation
             reportBuilder.AppendLine($"Average Time In Use Per Dock: {averageTimeInUsePerDock} time increments");
             reportBuilder.AppendLine($"Average Time Not In Use Per Dock: {averageTimeNotInUsePerDock} time increments");
 
-            // Get the path to the user's Downloads folder
+           
             string downloadsPath = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + @"\Downloads";
 
-            // Define the full path for the report file in the Downloads folder
+            
             string reportFilePath = Path.Combine(downloadsPath, "simulation_report.txt");
 
-            // Save the report to the specified path
+            
             File.WriteAllText(reportFilePath, reportBuilder.ToString());
         }
 

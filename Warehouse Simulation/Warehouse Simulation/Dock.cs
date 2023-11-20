@@ -58,10 +58,10 @@ namespace Warehouse_Simulation
                 Crate crate = currentTruck.Unload();
                 if (crate != null)
                 {
-                    // Pass warehouseInstance to DetermineUnloadingScenario
+                    
                     string scenario = DetermineUnloadingScenario(currentTruck, warehouseInstance);
 
-                    // Log the unloading event
+                  
                     warehouseInstance.LogCrateUnloading(crate, currentTruck, scenario);
 
                     TotalSales += crate.Price;

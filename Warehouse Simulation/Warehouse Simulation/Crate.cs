@@ -30,7 +30,7 @@ namespace Warehouse_Simulation
         private double GenerateRandomPrice()
         {
             Random rnd = new Random();
-            return rnd.NextDouble() * (500 - 50) + 50; // Price between $50 and $500
+            return rnd.NextDouble() * (500 - 50) + 50; 
         }
     }
 }
