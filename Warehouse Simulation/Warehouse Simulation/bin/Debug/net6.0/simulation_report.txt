@@ -1,0 +1,11 @@
+Warehouse Simulation Report
+Total Number of Docks: 4
+Total Revenue: $38511.705655365746
+Total Operating Cost: $13200
+Net Revenue: $25311.705655365746
+Total Crates Unloaded: 132
+Total Trucks Processed: 23
+Average Value per Crate: $291.75534587398295
+Average Value per Truck: $1674.421985015902
+Average Time In Use Per Dock: 33 time increments
+Average Time Not In Use Per Dock: 1 time increments
